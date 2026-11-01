@@ -8,8 +8,8 @@ function add(...list) {
 };
 
 function GameLoop() {
- points += gain/60;
- update("p","innerHTML",add("you have", points, " antimatter!"));
+  points += gain/60;
+  update("p","innerHTML",add("you have", points, " antimatter!"));
 };
 
 function update(get,type,set) {
