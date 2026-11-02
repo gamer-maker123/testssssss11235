@@ -24,6 +24,14 @@ let levelpack = [
 let level = 0;
 let won = false;
 
+function saveGame2() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ level }));
+  } catch (error) {
+    console.warn("Could not save game progress: ", error);
+  }
+}
+
 function saveGame() {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ level }));
