@@ -9,5 +9,5 @@ let level = 0;
 function update(get,type,set) {
   document.getElementById(get)[type] = set;
 };
-
+ctx.fillStyle = levelpack[level][2]
 ctx.fillRect(10,10,200,200);
