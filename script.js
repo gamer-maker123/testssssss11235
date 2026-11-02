@@ -3,7 +3,7 @@ const ctx = canvas.getContext("2d");
 const size = 100;
 const STORAGE_KEY = "baba-is-you-save";
 const objects = [
-  ["empty",0]
+  ["empty",0],
   ["baba","#FFFFFF"],
   ["flag","#FFFF00"]
 ];
