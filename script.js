@@ -1,18 +1,28 @@
 const canvas = document.getElementById("myCanvas");
+if (!canvas) {
+  throw new Error("Canvas not found. Make sure the script runs after the canvas element exists.");
+}
+
 const ctx = canvas.getContext("2d");
+if (!ctx) {
+  throw new Error("2D context not available.");
+}
+
 const size = 100;
 const STORAGE_KEY = "baba-is-you-save";
+
 const objects = [
-  ["empty",0],
-  ["baba","#FFFFFF"],
-  ["flag","#FFFF00"]
+  ["empty", 0],
+  ["baba", "#FFFFFF"],
+  ["flag", "#FFFF00"]
 ];
 
 let levelpack = [
-  [3,3,"#404040",[[0,"baba","you"],[0,"flag","win"]],[1,0,0],[2,2,2]]
+  [3, 3, "#404040", [[0, "baba", "you"], [0, "flag", "win"]], [1, 0, 0], [2, 2, 2]]
 ];
+
 let level = 0;
-let won = False;
+let won = false;
 
 function saveGame() {
   try {
@@ -36,27 +46,28 @@ function loadGame() {
   }
 }
 
-function update(get,type,set) {
-  document.getElementById(get)[type] = set;
-};
-
 function show() {
-  update("myCanvas","width",levelpack[level][0]*size);
-  update("myCanvas","height",levelpack[level][1]*size);
+  canvas.width = levelpack[level][0] * size;
+  canvas.height = levelpack[level][1] * size;
+
   ctx.fillStyle = levelpack[level][2];
-  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
   for (let i = 4; i < levelpack[level].length; i++) {
     let thislevel = levelpack[level];
-    let [id,x,y] = thislevel[i];
-    if (id == 0) {
+    let [id, x, y] = thislevel[i];
+
+    if (id === 0) {
       ctx.fillStyle = levelpack[level][2];
     } else {
       ctx.fillStyle = objects[id][1];
-    };
-    ctx.fillRect(x*size,(-y-1+thislevel[1])*size,size,size);
-  };
+    }
+
+    ctx.fillRect(x * size, (-y - 1 + thislevel[1]) * size, size, size);
+  }
+
   saveGame();
-};
+}
 
 loadGame();
 show();
