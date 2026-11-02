@@ -1,19 +1,13 @@
-let points = 0;
-let gain = 1;
+const canvas = document.getElementById("myCanvas");
+const ctx = canvas.getContext("2d");
 
-function add(...list) {
-  if (list.length === 0) return "";
-  if (list.length === 1) return String(list[0]);
-  return String(list[0]) + add(...list.slice(1));
-};
-
-function GameLoop() {
-  points += gain/60;
-  update("points","innerHTML",add("you have", points, " antimatter!"));
-};
+let levelpack = [
+  [3,3,"#404040",[[0,"baba","you"],[0,"flag","win"]],["baba",0,0],["flag",2,2]]
+];
+let level = 0;
 
 function update(get,type,set) {
   document.getElementById(get)[type] = set;
 };
 
-setInterval(GameLoop,13);
+ctx.fillRect(10,10,200,200);
