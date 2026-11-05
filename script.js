@@ -24,21 +24,24 @@ let levelpack = [
 let level = 0;
 let won = false;
 
-function saveGame2() {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ level }));
-  } catch (error) {
-    console.warn("Could not save game progress: ", error);
-  }
-}
+function objsat(x,y) {
+  let objs = [];
+  let thislevel = levelpack[level];
+  for (let i = 3; i < thislevel.length; i++) {
+    if (thislevel[i] = [thislevel[i][0],x,y]) {
+      objs += [thislevel[i]];
+    };
+  };
+  return objs;
+};
 
 function saveGame() {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ level }));
   } catch (error) {
     console.warn("Could not save game progress: ", error);
-  }
-}
+  };
+};
 
 function loadGame() {
   try {
@@ -48,11 +51,11 @@ function loadGame() {
     const data = JSON.parse(saved);
     if (Number.isInteger(data.level) && data.level >= 0) {
       level = data.level;
-    }
+    };
   } catch (error) {
     console.warn("Could not load saved game progress: ", error);
-  }
-}
+  };
+};
 
 function show() {
   canvas.width = levelpack[level][0] * size;
@@ -69,13 +72,13 @@ function show() {
       ctx.fillStyle = levelpack[level][2];
     } else {
       ctx.fillStyle = objects[id][1];
-    }
+    };
 
     ctx.fillRect(x * size, (-y - 1 + thislevel[1]) * size, size, size);
-  }
+  };
 
   saveGame();
-}
+};
 
 loadGame();
 show();
